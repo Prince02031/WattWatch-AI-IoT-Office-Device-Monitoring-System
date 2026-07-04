@@ -238,7 +238,7 @@ The Wokwi simulation represents **one room** of WattWatch. Each room has the sam
   - Switch 4: Light 2
   - Switch 5: Light 3
 - **Outputs**: 5 LEDs signaling device ON/OFF load activation (visualizing status).
-- **Behavior**: The ESP32 monitors switch inputs and updates indicators. In a physical production environment, these LEDs correspond to smart relay outputs (e.g., solid-state relays or current sensors) controlling actual fans and lights.
+- **Behavior & Telemetry**: The ESP32 monitors switch inputs and drives indicator LEDs (which correspond to physical relay outputs in production). It continuously streams structured **JSON snapshots** to the Serial Monitor (115200 baud) containing calculated live load, active device counts, individual device statuses, and run-time durations. This demonstrates a production-ready edge telemetry logging flow.
 
 - **Wokwi Link**: [https://wokwi.com/projects/468606180839007233](https://wokwi.com/projects/468606180839007233)
 
