@@ -1,0 +1,20 @@
+{
+  "name": "wattwatch-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord Bot with Gemini Integration for WattWatch energy monitoring",
+  "main": "src/bot.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.13.0",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
