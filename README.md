@@ -199,7 +199,6 @@ The chatbot listens for the prefix `!` in the configured Discord server/channel:
   ![Help Command](demo/discord-help.png)
 
 - **`!status`**: Summarizes active fan/light counts and load per room, plus total office power.
-  ![Status Command](demo/discord-bot-response.png)
 
 - **`!room <name>`**: Shows device lists and warnings for a room (aliases like `!room drawing room` or `!room work room 2` are tolerated).
   ![Room Command](demo/discord-room.png)
