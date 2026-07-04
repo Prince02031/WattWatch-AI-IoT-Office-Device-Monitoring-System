@@ -10,12 +10,28 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 - **Backend API**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app)
 - **Wokwi Circuit**: `<paste your Wokwi room simulation link here>`
 - **Demo Video**: `<paste your Loom or YouTube video link here>`
-- **System Architecture Diagram**: [diagrams/system-architecture.drawio](diagrams/system-architecture.drawio)
-- **Data Flow Diagram**: [diagrams/data-flow.drawio](diagrams/data-flow.drawio)
+- **System Architecture Diagram**: [diagrams/system-architecture.drawio.png](diagrams/system-architecture.drawio.png)
+- **Data Flow Diagram**: [diagrams/data-flow.drawio.png](diagrams/data-flow.drawio.png)
 
 ---
 
-## Screenshots
+## Screenshots Reference Directory
+
+Before submitting, capture these screenshots and place them in the specified folders with the exact filenames listed below to display them on the GitHub page:
+
+| Image Description | Required Folder Location | Filename |
+| :--- | :--- | :--- |
+| **System Architecture Schema** | `/diagrams` | `system-architecture.drawio.png` *(already present)* |
+| **Data Flow Telemetry Schema** | `/diagrams` | `data-flow.drawio.png` *(already present)* |
+| **Full Web Dashboard View** | `/demo` | `dashboard-overview.png` |
+| **Glowing/Spinning Floor Blueprint** | `/demo` | `office-layout.png` |
+| **Severity Warning Feed** | `/demo` | `alerts-panel.png` |
+| **Discord Chat Command Interaction** | `/demo` | `discord-bot-response.png` |
+| **Wokwi ESP32 Board Schematic** | `/circuit` | `schematic-screenshot.png` |
+
+---
+
+## Screenshots Display
 
 ### Dashboard Overview
 ![Dashboard Overview](demo/dashboard-overview.png)
@@ -29,7 +45,7 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 ### Discord Bot Response
 ![Discord Bot](demo/discord-bot-response.png)
 
-### Wokwi Circuit
+### Wokwi Circuit Concept
 ![Wokwi Circuit](circuit/schematic-screenshot.png)
 
 ---
@@ -66,7 +82,7 @@ WattWatch addresses this issue using a complete web and chat monitoring system:
 
 | Requirement | WattWatch Implementation |
 | :--- | :--- |
-| **High-level system diagram** | Included in `diagrams/system-architecture.png` |
+| **High-level system diagram** | Included in `diagrams/system-architecture.drawio.png` |
 | **Hardware/electrical schematic** | Wokwi ESP32 one-room circuit in `circuit/` |
 | **Simulated device data** | Backend simulator creates dynamic states for 15 devices |
 | **Web dashboard** | React dashboard with live status, power, alerts, and office layout |
@@ -91,17 +107,17 @@ The WattWatch workspace manages exactly **3 rooms** containing a total of **15 d
 
 ## 5. System Architecture
 
-![WattWatch System Architecture](diagrams/system-architecture.png)
+![WattWatch System Architecture](diagrams/system-architecture.drawio.png)
 
-The system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs. Read more in [diagrams/README.md](diagrams/README.md).
+The system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs. 
 
 ---
 
 ## 6. Data Flow
 
-![WattWatch Data Flow](diagrams/data-flow.png)
+![WattWatch Data Flow](diagrams/data-flow.drawio.png)
 
-Device state changes are simulated in the backend, power and alerts are recalculated, and updates are sent to both the dashboard and Discord bot interfaces. Read more in [diagrams/README.md](diagrams/README.md).
+Device state changes are simulated in the backend, power and alerts are recalculated, and updates are sent to both the dashboard and Discord bot interfaces.
 
 ---
 
@@ -218,9 +234,20 @@ The bot leverages Google's **Gemini 1.5 Flash API** to rewrite technical JSON re
 ---
 
 ## 15. Wokwi ESP32 Representative Circuit
-- The Wokwi simulation acts as a representative model for **one room** of the office (containing 2 fans and 3 lights).
-- The same design repeats three times to form the complete office configuration of 15 devices.
-- An ESP32 microcontroller reads slide switches representing room controls and drives LED indicators representing relay/current-sensor controlled loads.
+
+The Wokwi simulation represents **one room** of WattWatch. Each room has the same structure: 2 fans and 3 lights. Therefore, this one-room circuit can be repeated three times to represent the complete office setup of 15 devices.
+
+### Hardware Prototyping Details
+- **Microcontroller**: ESP32 DevKit v1
+- **Inputs**: 5 Slide Switches representing virtual device state toggles:
+  - Switch 1: Fan 1
+  - Switch 2: Fan 2
+  - Switch 3: Light 1
+  - Switch 4: Light 2
+  - Switch 5: Light 3
+- **Outputs**: 5 LEDs signaling device ON/OFF load activation (visualizing status).
+- **Behavior**: The ESP32 monitors switch inputs and updates indicators. In a physical production environment, these LEDs correspond to smart relay outputs (e.g., solid-state relays or current sensors) controlling actual fans and lights.
+
 - **Wokwi Link**: `<paste your Wokwi room simulation link here>`
 - **Schematic Screenshot**: Refer to `circuit/schematic-screenshot.png`.
 
@@ -270,27 +297,44 @@ GEMINI_API_KEY=your_google_gemini_api_key_here
 
 ---
 
-## 18. Demo Video Script (3-Minute Flow)
+## 18. Complete 3-Minute Demo Video Script
 
-- **[0:00 - 0:20] Problem**
-  - *"Hello judges! Welcome to WattWatch. In offices, lights and fans are left running, causing unnecessary energy waste and higher operational cost. Let's look at how WattWatch stops this."*
-- **[0:20 - 0:50] Architecture Overview**
-  - Show the system architecture diagram.
-  - *"Our system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs."*
-- **[0:50 - 1:30] Dashboard Live Status**
-  - Show the dashboard layout. Toggle a device.
-  - *"Here is our React dashboard showing 3 rooms and exactly 15 devices. When I manual toggle a device off, the total live load immediately drops and updates without page refresh."*
-- **[1:30 - 2:00] Alerts & Power Usage**
-  - Change simulated time to 10:00 PM.
-  - *"WattWatch automatically catches anomalies. If devices are running outside office hours, the room outline pulses red and warnings appear in our alert feed."*
-- **[2:00 - 2:30] Discord Bot Commands**
-  - Query `!status` and `!usage` in Discord.
-  - *"Admins can query stats in Discord. Gemini formats raw facts into friendly updates, falling back to clean Markdown if the API throttles."*
-- **[2:30 - 2:45] Wokwi Circuit**
-  - Show the Wokwi schematic.
-  - *"The Wokwi circuit demonstrates how one physical room could be wired. The live demo uses the backend simulator as the active data source."*
-- **[2:45 - 3:00] Closing**
-  - *"By utilizing a shared backend as our single source of truth, WattWatch keeps web views and chat assistants in perfect lockstep. Thank you!"*
+A detailed sequence mapping presentation timings, on-screen actions, and speech text:
+
+### 1. Problem & Hook (0:00 - 0:20)
+- **Visual Action**: Display the React Web Dashboard home screen.
+- **Presenter Speech**:
+  > *"Hello judges! Welcome to **WattWatch**. In modern office environments, electrical appliances like fans and lights are frequently left running in unoccupied rooms, leading to avoidable electricity waste, unnecessary energy waste, and higher operational cost. WattWatch solves this problem by integrating a central monitoring dashboard, automated alert dispatching, and a natural-language Discord assistant."*
+
+### 2. System Architecture (0:20 - 0:50)
+- **Visual Action**: Switch to the system architecture diagram in your slides.
+- **Presenter Speech**:
+  > *"Our system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs. Telemetry flows asynchronously from device states to clients without lag."*
+
+### 3. Dashboard Live Status (0:50 - 1:30)
+- **Visual Action**: Go back to the dashboard at `https://watt-watch-gamma.vercel.app/`. Show the aggregate power metrics and rotating fans. Click the toggle switch next to any light.
+- **Presenter Speech**:
+  > *"Here is our React dashboard showing 3 rooms and exactly 15 devices. When I manually toggle this device off, the total live load immediately drops and updates without page refresh. Active fans spin, and active lights display a warm glow to give admins clear visual feedback."*
+
+### 4. Alerts & Power Usage (1:30 - 2:00)
+- **Visual Action**: Toggle **DEMO TIME ON** in the header. Set the hours dropdown to **10:00 PM** (after-hours).
+- **Presenter Speech**:
+  > *"WattWatch automatically catches anomalies. If devices are running outside office hours (9 AM - 5 PM), the room outline pulses red and warnings appear in our alert feed. If we exceed a safe threshold like 400 Watts, an alarm triggers instantly."*
+
+### 5. Discord Bot Commands (2:00 - 2:30)
+- **Visual Action**: Go to your Discord channel. Send `!status` and display the formatted reply. Then send `!usage`.
+- **Presenter Speech**:
+  > *"Admins can query stats in Discord. Gemini formats raw facts into friendly updates, falling back to clean Markdown if the API throttles. In the background, our watcher checks for alerts every 20 seconds and announces them as rich embeds."*
+
+### 6. Wokwi ESP32 Circuit (2:30 - 2:45)
+- **Visual Action**: Switch to the Wokwi schematic page or screenshot.
+- **Presenter Speech**:
+  > *"The Wokwi circuit demonstrates how one physical room could be wired. Each room contains 2 fans and 3 lights. Repeating this structure three times models the entire 15-device office layout. The ESP32 drives indicator LEDs which represent physical relay outputs in production."*
+
+### 7. Closing & Core Philosophy (2:45 - 3:00)
+- **Visual Action**: Return to the live dashboard. Point to the connection sync badge.
+- **Presenter Speech**:
+  > *"By maintaining a single source of truth in the backend, WattWatch ensures that dashboard views, hardware models, and Discord feeds stay in lockstep. Thank you!"*
 
 ---
 
