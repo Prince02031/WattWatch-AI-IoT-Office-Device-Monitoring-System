@@ -45,7 +45,23 @@ WattWatch addresses this issue using a complete web and chat monitoring system:
 
 ---
 
-## 3. Requirement Coverage
+## 3. System Architecture
+
+![WattWatch System Architecture](diagrams/system-architecture.drawio.png)
+
+The system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs.
+
+---
+
+## 4. Data Flow
+
+![WattWatch Data Flow](diagrams/data-flow.drawio.png)
+
+Device state changes are simulated in the backend, power and alerts are recalculated, and updates are sent to both the dashboard and Discord bot interfaces.
+
+---
+
+## 5. Requirement Coverage
 
 | Requirement | WattWatch Implementation |
 | :--- | :--- |
@@ -60,7 +76,7 @@ WattWatch addresses this issue using a complete web and chat monitoring system:
 
 ---
 
-## 4. Exact Office Setup
+## 6. Exact Office Setup
 The WattWatch workspace manages exactly **3 rooms** containing a total of **15 devices**:
 
 | Room ID | Room Name | Fans (60W each) | Lights (15W each) | Total Devices | Maximum Load |
@@ -69,22 +85,6 @@ The WattWatch workspace manages exactly **3 rooms** containing a total of **15 d
 | `work1` | Work Room 1 | 2 | 3 | 5 | 165 W |
 | `work2` | Work Room 2 | 2 | 3 | 5 | 165 W |
 | **Total** | **3 Rooms** | **6 Fans** | **9 Lights** | **15 Devices** | **495 W** |
-
----
-
-## 5. System Architecture
-
-![WattWatch System Architecture](diagrams/system-architecture.drawio.png)
-
-The system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs. 
-
----
-
-## 6. Data Flow
-
-![WattWatch Data Flow](diagrams/data-flow.drawio.png)
-
-Device state changes are simulated in the backend, power and alerts are recalculated, and updates are sent to both the dashboard and Discord bot interfaces.
 
 ---
 
