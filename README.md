@@ -7,7 +7,8 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 ## Important Links
 
 - **Live Dashboard**: [https://watt-watch-gamma.vercel.app/](https://watt-watch-gamma.vercel.app/)
-- **Backend API**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app)
+- **Backend API Health Check**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app/api/health](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app/api/health)
+- **Backend API Snapshot Data**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app/api/snapshot](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app/api/snapshot)
 - **Wokwi Circuit**: [https://wokwi.com/projects/468606180839007233](https://wokwi.com/projects/468606180839007233)
 - **Demo Video**: [https://youtu.be/R7ovZ-cypEQ](https://youtu.be/R7ovZ-cypEQ)
 - **System Architecture Diagram**: [diagrams/system-architecture.drawio.png](diagrams/system-architecture.drawio.png)
@@ -238,7 +239,7 @@ The Wokwi simulation represents **one room** of WattWatch. Each room has the sam
 - **Outputs**: 5 LEDs signaling device ON/OFF load activation (visualizing status).
 - **Behavior**: The ESP32 monitors switch inputs and updates indicators. In a physical production environment, these LEDs correspond to smart relay outputs (e.g., solid-state relays or current sensors) controlling actual fans and lights.
 
-- **Wokwi Link**: `<paste your Wokwi room simulation link here>`
+- **Wokwi Link**: [https://wokwi.com/projects/468606180839007233](https://wokwi.com/projects/468606180839007233)
 
 ### Wokwi Hardware Visual Preview
 

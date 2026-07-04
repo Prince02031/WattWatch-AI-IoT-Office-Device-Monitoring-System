@@ -16,7 +16,7 @@ The Wokwi simulation represents one room of WattWatch. Each room has the same st
 ---
 
 ## 🔗 Project Assets
-- **Wokwi Project Link**: <paste your Wokwi link here>
-- **Circuit Schematic**: Refer to `circuit/schematic-screenshot.png` below.
+- **Wokwi Project Link**: [https://wokwi.com/projects/468606180839007233](https://wokwi.com/projects/468606180839007233)
+- **Circuit Schematic**: Refer to `schematic-screenshot.png` below.
 
-![Circuit Diagram Screenshot](/circuit/schematic-screenshot.png)
+![Circuit Diagram Screenshot](schematic-screenshot.png)
