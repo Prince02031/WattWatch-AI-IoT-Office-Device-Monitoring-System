@@ -9,7 +9,7 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 - **Live Dashboard**: [https://watt-watch-gamma.vercel.app/](https://watt-watch-gamma.vercel.app/)
 - **Backend API**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app)
 - **Wokwi Circuit**: [https://wokwi.com/projects/468606180839007233](https://wokwi.com/projects/468606180839007233)
-- **Demo Video**: `<paste your Loom or YouTube video link here>`
+- **Demo Video**: [https://youtu.be/R7ovZ-cypEQ](https://youtu.be/R7ovZ-cypEQ)
 - **System Architecture Diagram**: [diagrams/system-architecture.drawio.png](diagrams/system-architecture.drawio.png)
 - **Data Flow Diagram**: [diagrams/data-flow.drawio.png](diagrams/data-flow.drawio.png)
 
@@ -217,7 +217,7 @@ The Discord bot automatically monitors the backend and announces newly triggered
 ---
 
 ## 14. Gemini API Integration
-The bot leverages Google's **Gemini 1.5 Flash API** to rewrite technical JSON response facts into friendly, natural messages. 
+The bot leverages Google's **Gemini 2.5 Flash API** to rewrite technical JSON response facts into friendly, natural messages. 
 - **Facts Enforcement**: The prompt instructs the model strictly to preserve all numbers, device names, room counts, and active alert descriptions. Gemini is only used to format the presentation tone.
 - **Resilient Fallback**: If `GEMINI_API_KEY` is omitted or calls are throttled, the bot automatically falls back to clean, pre-formatted Markdown templates, ensuring 100% uptime.
 
