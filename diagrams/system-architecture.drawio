@@ -1,0 +1,56 @@
+<mxfile host="app.diagrams.net" modified="2026-07-04T11:10:00.000Z" agent="Mozilla/5.0" version="21.0.0" type="device">
+  <diagram id="sys_arch_1" name="System Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Wokwi Node -->
+        <mxCell id="wokwi" value="Wokwi IoT Room Prototype&#xa;(ESP32 + Switches + LEDs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Backend Server -->
+        <mxCell id="backend" value="Express Backend Server&#xa;(Node.js + Socket.IO)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="340" y="220" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Dashboard Frontend -->
+        <mxCell id="dashboard" value="React Web Dashboard&#xa;(Vite + Tailwind CSS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="640" y="110" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Discord Bot -->
+        <mxCell id="discord_bot" value="Discord Bot&#xa;(discord.js Framework)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="640" y="330" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Gemini API -->
+        <mxCell id="gemini_api" value="Google Gemini API&#xa;(gemini-1.5-flash)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="930" y="330" width="160" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Wokwi -> Backend Edge -->
+        <mxCell id="edge1" value="REST / Telemetry" style="endArrow=classic;html=1;strokeWidth=2;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="wokwi" target="backend">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Backend <-> Dashboard Edges -->
+        <mxCell id="edge2" value="WebSockets &amp;&#xa;REST Commands" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=2;fontSize=11;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;rounded=1;" edge="1" parent="1" source="backend" target="dashboard">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Backend -> Discord Bot Edge -->
+        <mxCell id="edge3" value="REST Alert Polling" style="endArrow=classic;html=1;strokeWidth=2;fontSize=11;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;rounded=1;" edge="1" parent="1" source="backend" target="discord_bot">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Discord Bot <-> Gemini API Edge -->
+        <mxCell id="edge4" value="Friendly Rephrasing" style="endArrow=classic;startArrow=classic;html=1;strokeWidth=2;fontSize=11;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="discord_bot" target="gemini_api">
+          <mxGeometry width="50" height="50" relative="1" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
