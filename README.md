@@ -15,22 +15,6 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 
 ---
 
-## Screenshots Reference Directory
-
-Before submitting, capture these screenshots and place them in the specified folders with the exact filenames listed below to display them on the GitHub page:
-
-| Image Description | Required Folder Location | Filename |
-| :--- | :--- | :--- |
-| **System Architecture Schema** | `/diagrams` | `system-architecture.drawio.png` *(already present)* |
-| **Data Flow Telemetry Schema** | `/diagrams` | `data-flow.drawio.png` *(already present)* |
-| **Full Web Dashboard View** | `/demo` | `dashboard-overview.png` |
-| **Glowing/Spinning Floor Blueprint** | `/demo` | `office-layout.png` |
-| **Severity Warning Feed** | `/demo` | `alerts-panel.png` |
-| **Discord Chat Command Interaction** | `/demo` | `discord-bot-response.png` |
-| **Wokwi ESP32 Board Schematic** | `/circuit` | `schematic-screenshot.png` |
-
----
-
 ## 1. Problem Summary
 In modern offices, electrical appliances like fans and lights are frequently left running in unoccupied rooms after office hours or during lunch breaks. This leads to avoidable electricity waste, unnecessary energy waste, and higher operational cost. To solve this, the office administration ("the boss") requires a centralized, real-time energy monitoring dashboard to track active loads, alongside an AI-integrated Discord bot to query live status, fetch consumption metrics, and automatically alert team members of power anomalies.
 
