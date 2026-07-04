@@ -4,40 +4,76 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 
 ---
 
+## Important Links
+
+- **Live Dashboard**: [https://watt-watch-gamma.vercel.app/](https://watt-watch-gamma.vercel.app/)
+- **Backend API**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app)
+- **Wokwi Circuit**: `<paste your Wokwi room simulation link here>`
+- **Demo Video**: `<paste your Loom or YouTube video link here>`
+- **System Architecture Diagram**: [diagrams/system-architecture.drawio](diagrams/system-architecture.drawio)
+- **Data Flow Diagram**: [diagrams/data-flow.drawio](diagrams/data-flow.drawio)
+
+---
+
+## Screenshots
+
+### Dashboard Overview
+![Dashboard Overview](demo/dashboard-overview.png)
+
+### Live Office Layout
+![Office Layout](demo/office-layout.png)
+
+### Active Alerts
+![Alerts Panel](demo/alerts-panel.png)
+
+### Discord Bot Response
+![Discord Bot](demo/discord-bot-response.png)
+
+### Wokwi Circuit
+![Wokwi Circuit](circuit/schematic-screenshot.png)
+
+---
+
 ## 1. Problem Summary
-In modern offices, electrical appliances like fans and lights are frequently left running in unoccupied rooms after office hours or during lunch breaks. This leads to substantial electricity waste, higher utility bills, and a larger carbon footprint. To solve this, the office administration ("the boss") requires a centralized, real-time energy monitoring dashboard to track active loads, alongside an AI-integrated Discord bot to query live status, fetch consumption metrics, and automatically alert team members of power anomalies.
+In modern offices, electrical appliances like fans and lights are frequently left running in unoccupied rooms after office hours or during lunch breaks. This leads to avoidable electricity waste, unnecessary energy waste, and higher operational cost. To solve this, the office administration ("the boss") requires a centralized, real-time energy monitoring dashboard to track active loads, alongside an AI-integrated Discord bot to query live status, fetch consumption metrics, and automatically alert team members of power anomalies.
 
 ---
 
 ## 2. Solution Overview
 WattWatch addresses this issue using a complete web and chat monitoring system:
-1. **IoT Simulation Layer**: A local simulation engine running inside the backend mimics sensor activity, toggling device states and generating telemetry data.
-2. **Backend Server**: An Express.js REST API and Socket.IO WebSockets server that manages state, computes live usage statistics (Watts, accumulated kWh), evaluates rule-based warnings, and broadcasts updates instantly.
+1. **Wokwi One-Room Hardware Concept**: Demonstrates how one physical room could be wired.
+2. **Backend Simulated Device Layer**: An Express.js REST API and Socket.IO WebSockets server that manages state, computes live usage statistics (Watts, accumulated kWh), evaluates rule-based warnings, and broadcasts updates.
 3. **Web Dashboard**: A React, Vite, and Tailwind CSS single-page application displaying real-time office floor layouts with animated fans, glowing lights, and interactive controls to override device states.
 4. **Discord Bot**: An interactive chatbot that queries the backend, leverages the Gemini API to format stats into natural, friendly language, and polls the API to proactively push alerts directly to team channels.
 
 ```
-[Simulated IoT Devices / Wokwi Prototype]
-                  │ (REST / WebSockets)
-                  ▼
-         [Node.js Express Server]
-             /              \
-            ▼                ▼
-  [React Web Dashboard]   [Discord Bot] ◄──► [Gemini 1.5 Flash API]
+[Wokwi One-Room Hardware Concept]
+              │
+              ▼
+[Backend Simulated Device Layer]
+              │
+              ▼
+[Node.js Express + Socket.IO Backend]
+        /                              \
+       ▼                                ▼
+[React Dashboard]              [Discord Bot] ──► [Gemini API]
 ```
+*Note: The Wokwi circuit demonstrates how one physical room could be wired. The live demo uses the backend simulator as the active data source.*
 
 ---
 
-## 3. Key Features
-- **15 Simulated Devices**: Modeled with realistic default wattages (60W per fan, 15W per light).
-- **Real-Time Web Dashboard**: Responsive CSS layout visualizing active loads and device indicators.
-- **Room-Wise Monitoring**: Separate room stats tracking drawing room, work room 1, and work room 2.
-- **Live Power Calculation**: Real-time aggregation of active draw (W) and accumulated consumption (kWh).
-- **Active Alerts Engine**: Checks for after-hours activity, fully active rooms, and total load thresholds.
-- **Discord Integration**: Prefix command routing to query snapshots, usage, and room details.
-- **Gemini-Friendly Responses**: Dynamic natural language summarization with robust markdown fallbacks.
-- **Wokwi Circuit Concept**: ESP32 microcontroller prototype representing a single-room deployment.
-- **Deployment-Ready**: Structured environment files and package scripts ready for Render and Vercel.
+## 3. Requirement Coverage
+
+| Requirement | WattWatch Implementation |
+| :--- | :--- |
+| **High-level system diagram** | Included in `diagrams/system-architecture.png` |
+| **Hardware/electrical schematic** | Wokwi ESP32 one-room circuit in `circuit/` |
+| **Simulated device data** | Backend simulator creates dynamic states for 15 devices |
+| **Web dashboard** | React dashboard with live status, power, alerts, and office layout |
+| **Discord bot** | `discord.js` bot using the same backend data |
+| **Shared backend** | Express backend is the single source of truth |
+| **Real-time updates** | Socket.IO updates dashboard without refresh |
+| **Demo video** | Linked in Important Links section |
 
 ---
 
@@ -54,39 +90,97 @@ The WattWatch workspace manages exactly **3 rooms** containing a total of **15 d
 ---
 
 ## 5. System Architecture
-The overall architecture connects the express simulator with the frontend client and the chat gateway:
-- Read more in [diagrams/README.md](file:///d:/WebDev/Hackathon/RS%20Techathon/WattWatch/diagrams/README.md)
-- Schema Path: `diagrams/system-architecture.png` (or `diagrams/system-architecture.svg`)
+
+![WattWatch System Architecture](diagrams/system-architecture.png)
+
+The system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs. Read more in [diagrams/README.md](diagrams/README.md).
 
 ---
 
 ## 6. Data Flow
-Telemetry flow originates from the device/simulator loop and disseminates via socket event streams and REST calls:
-- Read more in [diagrams/README.md](file:///d:/WebDev/Hackathon/RS%20Techathon/WattWatch/diagrams/README.md)
-- Schema Path: `diagrams/data-flow.png` (or `diagrams/data-flow.svg`)
+
+![WattWatch Data Flow](diagrams/data-flow.png)
+
+Device state changes are simulated in the backend, power and alerts are recalculated, and updates are sent to both the dashboard and Discord bot interfaces. Read more in [diagrams/README.md](diagrams/README.md).
 
 ---
 
-## 7. Backend API Documentation
+## 7. Key Features
+- **15 Simulated Devices**: Modeled with realistic default wattages (60W per fan, 15W per light).
+- **Real-Time Web Dashboard**: Responsive CSS layout visualizing active loads and device indicators.
+- **Room-Wise Monitoring**: Separate room stats tracking drawing room, work room 1, and work room 2.
+- **Live Power Calculation**: Real-time aggregation of active draw (W) and accumulated consumption (kWh).
+- **Active Alerts Engine**: Checks for after-hours activity, fully active rooms, and total load thresholds.
+- **Discord Integration**: Prefix command routing to query snapshots, usage, and room details.
+- **Gemini-Friendly Responses**: Dynamic natural language summarization with robust markdown fallbacks.
+- **Wokwi Circuit Concept**: ESP32 microcontroller prototype representing a single-room deployment.
+- **Deployment-Ready**: Structured environment files and package scripts ready for Render and Vercel.
+
+---
+
+## 8. Project Structure
+
+```text
+wattwatch/
+├── backend/        # Express API, simulator, Socket.IO, alert engine
+├── dashboard/      # React + Vite dashboard
+├── discord-bot/    # Discord bot with Gemini response formatting
+├── circuit/        # Wokwi circuit link, screenshot, explanation
+├── diagrams/       # System architecture and data-flow diagrams
+├── demo/           # Demo screenshots and video script
+└── README.md
+```
+
+---
+
+## 9. Quick Start
+
+### 1. Backend
+```bash
+cd backend
+npm install
+npm run dev
+```
+Backend runs at: `http://localhost:5000`  
+Test: `http://localhost:5000/api/snapshot`
+
+### 2. Dashboard
+```bash
+cd dashboard
+npm install
+npm run dev
+```
+Dashboard runs at: `http://localhost:5173`
+
+### 3. Discord Bot
+```bash
+cd discord-bot
+npm install
+npm start
+```
+
+---
+
+## 10. Backend API Documentation
 
 All routes are prefixed with `/api`:
 
-| Method | Endpoint | Description | Payload (JSON) |
-| :--- | :--- | :--- | :--- |
-| **GET** | `/health` | Check backend server status and uptime | None |
-| **GET** | `/devices` | Retrieve list of all 15 devices with status | None |
-| **GET** | `/rooms` | Get summarized status for the 3 rooms | None |
-| **GET** | `/usage` | Retrieve live office wattage and energy (kWh) totals | None |
-| **GET** | `/alerts` | Get the list of currently active system warnings | None |
-| **GET** | `/snapshot` | Get combined state (devices, usage, alerts, simulatedHour) | None |
-| **POST** | `/devices/:id/toggle` | Manually switch a device status (`on`/`off`) | `{"status": "on"}` or `{"status": "off"}` |
-| **POST** | `/demo/force-alerts` | Force-trigger alarm rules (turn Work Room 2 ON) | None |
-| **POST** | `/demo/reset` | Restore simulator variables to default baseline states | None |
-| **POST** | `/demo/time` | Override simulation hour or reset to system time | `{"hour": 22}` (or `{"hour": null}`) |
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/api/health` | Check backend server status |
+| **GET** | `/api/devices` | Retrieve all 15 devices |
+| **GET** | `/api/rooms` | Get room-wise summaries |
+| **GET** | `/api/usage` | Get live wattage and kWh |
+| **GET** | `/api/alerts` | Get active alerts |
+| **GET** | `/api/snapshot` | Get devices, usage, alerts, and demo time |
+| **POST** | `/api/devices/:id/toggle` | Toggle one device |
+| **POST** | `/api/demo/force-alerts` | Force demo alerts |
+| **POST** | `/api/demo/reset` | Reset demo state |
+| **POST** | `/api/demo/time` | Override demo hour |
 
 ---
 
-## 8. Socket.IO Broadcast Events
+## 11. Socket.IO Broadcast Events
 The server uses Socket.IO to push updates instantly on the following channels:
 - `snapshot`: Broadcasts a full combined state payload on client connection or major reset.
 - `devices:update`: Dispatched whenever a device's status is toggled.
@@ -96,7 +190,7 @@ The server uses Socket.IO to push updates instantly on the following channels:
 
 ---
 
-## 9. Dashboard Features
+## 12. Dashboard Features
 - **Aggregate Stat Cards**: Displays total live power consumption (W), cumulative energy (kWh), active device counts, and rooms.
 - **Top-Down Office Blueprint**: A visual HTML/CSS map representing the office layout. Active fans spin dynamically, active lights display a warm yellow glow, and alerting rooms flash with a red boundary animation.
 - **Interactive Control Panel**: Lists all devices in the selected room, allowing users to override statuses manually.
@@ -106,8 +200,8 @@ The server uses Socket.IO to push updates instantly on the following channels:
 
 ---
 
-## 10. Discord Bot Commands
-The chatbot listens for the prefix `!` in authorized channels:
+## 13. Discord Bot Commands
+The chatbot listens for the prefix `!` in the configured Discord server/channel:
 - **`!help`**: Returns the list of commands and syntax guide.
 - **`!status`**: Summarizes active fan/light counts and load per room, plus total office power.
 - **`!room <name>`**: Shows device lists and warnings for a room (aliases like `!room drawing room` or `!room work room 2` are tolerated).
@@ -116,23 +210,23 @@ The chatbot listens for the prefix `!` in authorized channels:
 
 ---
 
-## 11. Gemini API Integration
+## 14. Gemini API Integration
 The bot leverages Google's **Gemini 1.5 Flash API** to rewrite technical JSON response facts into friendly, natural messages. 
 - **Facts Enforcement**: The prompt instructs the model strictly to preserve all numbers, device names, room counts, and active alert descriptions. Gemini is only used to format the presentation tone.
 - **Resilient Fallback**: If `GEMINI_API_KEY` is omitted or calls are throttled, the bot automatically falls back to clean, pre-formatted Markdown templates, ensuring 100% uptime.
 
 ---
 
-## 12. Wokwi ESP32 Representative Circuit
+## 15. Wokwi ESP32 Representative Circuit
 - The Wokwi simulation acts as a representative model for **one room** of the office (containing 2 fans and 3 lights).
 - The same design repeats three times to form the complete office configuration of 15 devices.
 - An ESP32 microcontroller reads slide switches representing room controls and drives LED indicators representing relay/current-sensor controlled loads.
-- **Wokwi Link**: [Wokwi Smart Room Simulator Project Link](<paste your Wokwi link here>)
+- **Wokwi Link**: `<paste your Wokwi room simulation link here>`
 - **Schematic Screenshot**: Refer to `circuit/schematic-screenshot.png`.
 
 ---
 
-## 13. Environment Variables
+## 16. Environment Variables
 
 ### Backend (`/backend/.env`)
 ```env
@@ -157,42 +251,17 @@ GEMINI_API_KEY=your_google_gemini_api_key_here
 
 ---
 
-## 14. Local Installation & Execution
+## 17. Deployment Steps
 
-### 1. Run the Backend
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-### 2. Run the Dashboard
-```bash
-cd dashboard
-npm install
-npm run dev
-```
-
-### 3. Run the Discord Bot
-```bash
-cd discord-bot
-npm install
-npm start
-```
-
----
-
-## 15. Deployment Steps
-
-### Backend (Render)
-1. Create a new **Web Service** on Render and link your GitHub repository.
+### Backend (Render/Railway)
+1. Create a new **Web Service** on Render/Railway and link your GitHub repository.
 2. Select **Node** environment. Set the build command to `npm install` and start command to `npm start` (pointing to `backend` root).
-3. In Environment Variables, define `PORT=5000`, `DEMO_MODE=false`, and `CLIENT_URL` pointing to your frontend Vercel URL.
+3. In Environment Variables, define `PORT=5000`, `DEMO_MODE=true`, and `CLIENT_URL` pointing to your frontend Vercel URL.
 
 ### Dashboard (Vercel)
 1. Add a new project on Vercel and select the `/dashboard` folder.
 2. Set Build Command to `npm run build` and Output Directory to `dist`.
-3. Add the environment variable `VITE_BACKEND_URL` pointing to your deployed Render URL.
+3. Add the environment variable `VITE_BACKEND_URL` pointing to your deployed Railway/Render URL.
 
 ### Discord Bot
 1. Deploy as a background service/worker (e.g. on Railway or Render) with no web ports exposed.
@@ -201,26 +270,31 @@ npm start
 
 ---
 
-## 16. Demo Video Script (3-Minute Flow)
+## 18. Demo Video Script (3-Minute Flow)
 
-- **[0:00 - 0:40] Pitch & Context**
-  - *"Hello judges! Welcome to WattWatch. In offices, lights and fans are left running wasting power. Let's look at how WattWatch stops this. Our office setup has 3 rooms and exactly 15 devices. Let's see them live."*
-- **[0:40 - 1:20] Web Dashboard & Simulation**
-  - Show the dashboard dashboard. Point out the aggregate stats and animated floorplan.
-  - *"Here is our React dashboard. The fans are rotating and lights are glowing. Let's toggle one Drawing Room light off. Watch the live load drop instantly."*
-- **[1:20 - 2:00] Time Overrides & Alerts**
-  - Click **DEMO TIME ON** and change the hour to **10:00 PM** (after-hours).
-  - *"Watch as our alert engine automatically catches that devices are running outside the 9 AM - 5 PM window. Alarms trigger immediately."*
-- **[2:00 - 2:40] Discord Bot & Gemini**
-  - Open Discord. Type `!status` or `!usage`. Show the conversational response.
-  - *"Our Discord bot lets team members audit energy stats anytime. Gemini reformats the real-time facts into a friendly tone, keeping data accurate but easy to read."*
-- **[2:40 - 3:00] Wrap Up & Future Extensions**
-  - Show the proactive warning embed posted in the Discord channel by the polling watcher.
-  - *"Thank you for your time! In the future, we plan to extend this with real smart relays, cloud databases, and historical analytics."*
+- **[0:00 - 0:20] Problem**
+  - *"Hello judges! Welcome to WattWatch. In offices, lights and fans are left running, causing unnecessary energy waste and higher operational cost. Let's look at how WattWatch stops this."*
+- **[0:20 - 0:50] Architecture Overview**
+  - Show the system architecture diagram.
+  - *"Our system uses the backend as the single source of truth. The simulated device layer updates the backend, while the dashboard receives live Socket.IO updates and the Discord bot reads the same backend through REST APIs."*
+- **[0:50 - 1:30] Dashboard Live Status**
+  - Show the dashboard layout. Toggle a device.
+  - *"Here is our React dashboard showing 3 rooms and exactly 15 devices. When I manual toggle a device off, the total live load immediately drops and updates without page refresh."*
+- **[1:30 - 2:00] Alerts & Power Usage**
+  - Change simulated time to 10:00 PM.
+  - *"WattWatch automatically catches anomalies. If devices are running outside office hours, the room outline pulses red and warnings appear in our alert feed."*
+- **[2:00 - 2:30] Discord Bot Commands**
+  - Query `!status` and `!usage` in Discord.
+  - *"Admins can query stats in Discord. Gemini formats raw facts into friendly updates, falling back to clean Markdown if the API throttles."*
+- **[2:30 - 2:45] Wokwi Circuit**
+  - Show the Wokwi schematic.
+  - *"The Wokwi circuit demonstrates how one physical room could be wired. The live demo uses the backend simulator as the active data source."*
+- **[2:45 - 3:00] Closing**
+  - *"By utilizing a shared backend as our single source of truth, WattWatch keeps web views and chat assistants in perfect lockstep. Thank you!"*
 
 ---
 
-## 17. Future Improvements
+## 19. Future Improvements
 - **Hardware Integration**: Use physical smart relays (e.g. Sonoff, Shelly) and true current sensors (like SCT-013).
 - **MQTT Broker Communication**: Transition backend links to MQTT for lighter telemetry transport.
 - **Cloud Database Integration**: Add MongoDB or PostgreSQL to persist settings.
