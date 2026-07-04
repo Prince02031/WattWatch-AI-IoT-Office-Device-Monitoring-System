@@ -194,16 +194,21 @@ The server uses Socket.IO to push updates instantly on the following channels:
 
 ## 13. Discord Bot Commands
 The chatbot listens for the prefix `!` in the configured Discord server/channel:
+
 - **`!help`**: Returns the list of commands and syntax guide.
+  ![Help Command](demo/discord-help.png)
+
 - **`!status`**: Summarizes active fan/light counts and load per room, plus total office power.
+  ![Status Command](demo/discord-status.png)
+
 - **`!room <name>`**: Shows device lists and warnings for a room (aliases like `!room drawing room` or `!room work room 2` are tolerated).
+  ![Room Command](demo/discord-room.png)
+
 - **`!usage`**: Shows live load, kWh energy, and the room drawing the most power.
+  ![Usage Command](demo/discord-usage.png)
+
 - **`!alerts`**: Shows active warnings (or system nominal status).
-
-### Discord Bot Visual Preview
-
-#### Interactive Gemini Command Summary
-![Discord Bot](demo/discord-bot-response.png)
+  ![Alerts Command](demo/discord-alerts.png)
 
 ---
 
