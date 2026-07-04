@@ -24,7 +24,7 @@ const allowedOrigins = [
   'http://localhost:5173', // Vite default port
   'http://localhost:3000', // Alternative dev port
   config.clientUrl
-].filter(Boolean);
+].filter(Boolean).map(url => url.replace(/\/$/, ''));
 
 app.use(cors({
   origin: (origin, callback) => {
