@@ -11,6 +11,7 @@ Smart office energy monitoring dashboard and Discord bot using simulated IoT dat
 - **Backend API Snapshot Data**: [https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app/api/snapshot](https://wattwatch-ai-iot-office-device-monitoring-system-production.up.railway.app/api/snapshot)
 - **Wokwi Circuit**: [https://wokwi.com/projects/468606180839007233](https://wokwi.com/projects/468606180839007233)
 - **Demo Video**: [https://youtu.be/R7ovZ-cypEQ](https://youtu.be/R7ovZ-cypEQ)
+- **Live Demo Steps**: [demo/live-demo-steps.md](demo/live-demo-steps.md)
 - **System Architecture Diagram**: [diagrams/system-architecture.drawio.png](diagrams/system-architecture.drawio.png)
 - **Data Flow Diagram**: [diagrams/data-flow.drawio.png](diagrams/data-flow.drawio.png)
 
