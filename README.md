@@ -31,25 +31,6 @@ Before submitting, capture these screenshots and place them in the specified fol
 
 ---
 
-## Screenshots Display
-
-### Dashboard Overview
-![Dashboard Overview](demo/dashboard-overview.png)
-
-### Live Office Layout
-![Office Layout](demo/office-layout.png)
-
-### Active Alerts
-![Alerts Panel](demo/alerts-panel.png)
-
-### Discord Bot Response
-![Discord Bot](demo/discord-bot-response.png)
-
-### Wokwi Circuit Concept
-![Wokwi Circuit](circuit/schematic-screenshot.png)
-
----
-
 ## 1. Problem Summary
 In modern offices, electrical appliances like fans and lights are frequently left running in unoccupied rooms after office hours or during lunch breaks. This leads to avoidable electricity waste, unnecessary energy waste, and higher operational cost. To solve this, the office administration ("the boss") requires a centralized, real-time energy monitoring dashboard to track active loads, alongside an AI-integrated Discord bot to query live status, fetch consumption metrics, and automatically alert team members of power anomalies.
 
@@ -214,6 +195,17 @@ The server uses Socket.IO to push updates instantly on the following channels:
 - **Time Override Toggle**: Allows toggling "Demo Time" directly next to the sync status badge to simulate different hours and inspect after-hours rules.
 - **Demo Controls**: Quick action buttons to force alerts, reset simulation variables, or refresh state.
 
+### Dashboard Visual Previews
+
+#### Main Dashboard Overview
+![Dashboard Overview](demo/dashboard-overview.png)
+
+#### Real-Time Interactive Floorplan Layout
+![Office Layout](demo/office-layout.png)
+
+#### Active Rule Anomalies Feed
+![Alerts Panel](demo/alerts-panel.png)
+
 ---
 
 ## 13. Discord Bot Commands
@@ -223,6 +215,11 @@ The chatbot listens for the prefix `!` in the configured Discord server/channel:
 - **`!room <name>`**: Shows device lists and warnings for a room (aliases like `!room drawing room` or `!room work room 2` are tolerated).
 - **`!usage`**: Shows live load, kWh energy, and the room drawing the most power.
 - **`!alerts`**: Shows active warnings (or system nominal status).
+
+### Discord Bot Visual Preview
+
+#### Interactive Gemini Command Summary
+![Discord Bot](demo/discord-bot-response.png)
 
 ---
 
@@ -249,7 +246,11 @@ The Wokwi simulation represents **one room** of WattWatch. Each room has the sam
 - **Behavior**: The ESP32 monitors switch inputs and updates indicators. In a physical production environment, these LEDs correspond to smart relay outputs (e.g., solid-state relays or current sensors) controlling actual fans and lights.
 
 - **Wokwi Link**: `<paste your Wokwi room simulation link here>`
-- **Schematic Screenshot**: Refer to `circuit/schematic-screenshot.png`.
+
+### Wokwi Hardware Visual Preview
+
+#### ESP32 Wiring Schematic
+![Wokwi Circuit](circuit/schematic-screenshot.png)
 
 ---
 
